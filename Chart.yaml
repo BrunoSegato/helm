@@ -1,0 +1,4 @@
+apiVersion: v2
+name: helm-skeleton
+description: A helm chart for Kubernetes
+version: 0.1.0
