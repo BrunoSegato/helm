@@ -1,0 +1,28 @@
+fullnameOverride: "Teste"
+nameOverride: "#ENVIRONMENT#-demo-#SUFIX#"
+sufix: "job"
+
+service:
+  name: "demo"
+  port: 8888
+  targetPort: 8888
+
+namespace:
+  name: "demo"
+
+pod:
+  replicas: 3
+  image: brunosegato/myhello
+  tag: 1
+  requests:
+    memory: "10Mi"
+    cpu: "100m"
+  limits:
+    memory: "20Mi"
+    cpu: "250m"
+  livenessProbe:
+    port: 8888
+  readinessProbe:
+    port: 8888
+  scaling:
+    maxReplicas: 10

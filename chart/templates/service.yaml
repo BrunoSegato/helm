@@ -1,0 +1,17 @@
+{{- $fullname := include "app.fullname" . }}
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name | default $fullname | toString | replace "#fullname#" $fullname }}
+  labels:
+      app: {{ .Values.service.name | default $fullname | toString | replace "#fullname#" $fullname }}
+spec:
+  type: {{ .Values.service.type | default "ClusterIP" }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: {{ .Values.service.protocol | default "TCP" }}
+      name: {{ .Values.service.name | default "http" }}
+  selector:
+    app: {{ .Values.service.selector | default $fullname | toString | replace "#fullname#" $fullname }}

@@ -1,0 +1,23 @@
+{{- $fullname := include "app.fullname" . }}
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ $fullname }}
+  labels:
+    app: {{ $fullname }}
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: {{ $fullname }}
+  minReplicas: {{ .Values.pod.replicas }}
+  maxReplicas: {{ .Values.pod.scaling.maxReplicas | default 10 }}
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: 70
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 70

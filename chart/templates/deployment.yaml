@@ -1,0 +1,54 @@
+{{- $fullname := include "app.fullname" . }}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullname }}
+  labels:
+    app: {{ $fullname }}
+
+spec:
+  replicas: {{ .Values.pod.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $fullname }}
+  template:
+    metadata:
+      labels:
+        app: {{ $fullname }}
+    spec:
+      containers:
+        - name: {{ $fullname }}
+          image: {{ .Values.pod.image }}:{{ .Values.pod.tag }}
+          ports:
+          - containerPort: {{ .Values.pod.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ $fullname }}-config
+          resources:
+            requests:
+              memory: {{ .Values.pod.requests.memory }}
+              cpu: {{ .Values.pod.requests.cpu }}
+            limits:
+              memory: {{ .Values.pod.limits.memory }}
+              cpu: {{ .Values.pod.limits.cpu }}
+          securityContext:
+            runAsUser: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["all"]
+              add: ["NET_BIND_SERVICE"]
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.pod.livenessProbe.path | default "/" }}
+              port: {{ .Values.pod.livenessProbe.port }}
+            initialDelaySeconds: {{ .Values.pod.livenessProbe.initialDelaySeconds | default 3 }}
+            periodSeconds: {{ .Values.pod.livenessProbe.periodSeconds | default 3 }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.pod.readinessProbe.path | default "/" }}
+              port: {{ .Values.pod.readinessProbe.port }}
+            initialDelaySeconds: {{ .Values.pod.readinessProbe.initialDelaySeconds | default 3 }}
+            periodSeconds: {{ .Values.pod.readinessProbe.periodSeconds | default 3 }}
