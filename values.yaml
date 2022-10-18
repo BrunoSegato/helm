@@ -1,5 +1,4 @@
-fullnameOverride: "Teste"
-nameOverride: "#ENVIRONMENT#-demo-#SUFFIX#"
+fullnameOverride: "demo"
 suffix: "job"
 environment: staging
 
