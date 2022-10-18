@@ -3,19 +3,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $fullname }}
+  name: {{ .Values.environment }}-{{ $fullname }}
   labels:
-    app: {{ $fullname }}
+    app: {{ .Values.environment }}-{{ $fullname }}
 
 spec:
   replicas: {{ .Values.pod.replicas }}
   selector:
     matchLabels:
-      app: {{ $fullname }}
+      app: {{ .Values.environment }}-{{ $fullname }}
   template:
     metadata:
       labels:
-        app: {{ $fullname }}
+        app: {{ .Values.environment }}-{{ $fullname }}
     spec:
       containers:
         - name: {{ $fullname }}
@@ -24,7 +24,7 @@ spec:
           - containerPort: {{ .Values.pod.port }}
           envFrom:
             - configMapRef:
-                name: {{ $fullname }}-config
+                name: {{ .Values.environment }}-{{ $fullname }}-configmap
           resources:
             requests:
               memory: {{ .Values.pod.requests.memory }}

@@ -1,6 +1,7 @@
 fullnameOverride: "Teste"
-nameOverride: "#ENVIRONMENT#-demo-#SUFIX#"
-sufix: "job"
+nameOverride: "#ENVIRONMENT#-demo-#SUFFIX#"
+suffix: "job"
+environment: staging
 
 service:
   name: "demo"

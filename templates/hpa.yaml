@@ -3,13 +3,13 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ $fullname }}
+  name: {{ .Values.environment }}-{{ $fullname }}-hpa
   labels:
-    app: {{ $fullname }}
+    app: {{ .Values.environment }}-{{ $fullname }}-hpa
 spec:
   scaleTargetRef:
     kind: Deployment
-    name: {{ $fullname }}
+    name: {{ .Values.environment }}-{{ $fullname }}
   minReplicas: {{ .Values.pod.replicas }}
   maxReplicas: {{ .Values.pod.scaling.maxReplicas | default 10 }}
   metrics:
