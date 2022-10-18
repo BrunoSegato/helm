@@ -1,0 +1,10 @@
+{{- $fullname := include "app.fullname" . }}
+
+apiVersion: apps/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.environment }}-{{ $fullname }}-ingress
+spec:
+  backend:
+    serviceName: {{ .Values.environment }}-{{ $fullname }}
+    servicePort: 80
