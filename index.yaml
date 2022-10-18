@@ -9,6 +9,6 @@ entries:
     name: chart
     type: application
     urls:
-    - https://github.com/BrunoSegato/helm/chart-0.1.0.tgz
+    - https://brunosegato.github.io/helm/chart-0.1.0.tgz
     version: 0.1.0
 generated: "2022-10-18T09:39:24.450780921-03:00"
