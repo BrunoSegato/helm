@@ -15,6 +15,7 @@ pod:
   replicas: 3
   image: brunosegato/myhello
   tag: 1
+  port: 8888
   requests:
     memory: "10Mi"
     cpu: "100m"
