@@ -1,6 +1,8 @@
+{{- $fullname := include "app.fullname" . }}
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.environment }}-{{ .Release.Name }}-configmap
+  name: {{ .Values.environment }}-{{ $fullname }}-configmap
 data:
   myvalue: "Hello World"
