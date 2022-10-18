@@ -3,7 +3,7 @@ entries:
   chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-10-18T09:39:24.453162242-03:00"
+    created: "2022-10-18T09:54:13.242441261-03:00"
     description: A Helm chart for Kubernetes
     digest: 6f28d4d7610d62fc374a87b91db8b8eecc27600a4266c6e7b4ff99eb1bf9294e
     name: chart
@@ -11,4 +11,4 @@ entries:
     urls:
     - https://brunosegato.github.io/helm/chart-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-18T09:39:24.450780921-03:00"
+generated: "2022-10-18T09:54:13.241298618-03:00"
